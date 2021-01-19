@@ -9,3 +9,16 @@ before_install:
 script:
   - docker run abhyudaya/docker-react npm run test -- --coverage 
 # -- -- coverage to exit the test case when finished
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  name: docker-react
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-388460667113"
+  bucket_path: "docker-react" # same as application name
+  on:
+    branch: master # anytime we merge into master it is triggered
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+#------------------------------------------------------
